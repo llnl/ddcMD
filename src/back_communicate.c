@@ -158,19 +158,10 @@ integer treesize(integer n) {
   return list[n];
 }
 #else
-/* However, this one runs on O(log n) and uses constant storage :-) */
+/* However, this one is closed form: 0 for n == 0, else 2n - 1 :-) */
 integer treesize(integer n) {
-  integer s = 0,a = 1,b = 0;
   if(n == 0) return 0;
-  while(n > 1) {
-    s += a + b;
-    if(n & 1)
-      b = a + 2*b;
-    else
-      a = 2*a + b;
-    n = (n+1) >> 1;
-  }
-  return s + a - b;
+  return 2 * n - 1;
 }
 #endif
 
